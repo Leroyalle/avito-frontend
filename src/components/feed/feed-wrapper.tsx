@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { clsx } from 'clsx';
-import { Categories, QuickLinks, SearchSection } from './components';
+import { Categories, QuickLinks, Recommendations, SearchSection } from './components';
 
 interface Props {
   className?: string;
@@ -13,6 +13,7 @@ export const FeedWrapper: FC<Props> = ({ className }) => {
       <QuickLinks />
       <Categories />
       <Categories />
+      <Recommendations />
     </div>
   );
 };
