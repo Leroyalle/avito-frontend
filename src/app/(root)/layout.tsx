@@ -1,4 +1,4 @@
-import { AppStoreNoticeBanner, Header } from '@/components';
+import { AppStoreNoticeBanner, Footer, Header, ServicesBanner } from '@/components';
 
 export default function RootLayout({
   children,
@@ -9,7 +9,11 @@ export default function RootLayout({
     <div>
       <AppStoreNoticeBanner />
       <Header />
-      {children}
+      <main className="min-h-screen bg-gray-50">
+        {children}
+        <ServicesBanner />
+      </main>
+      <Footer />
     </div>
   );
 }
