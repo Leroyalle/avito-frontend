@@ -1,3 +1,4 @@
+import '@ant-design/v5-patch-for-react-19';
 import type { FC } from 'react';
 import { clsx } from 'clsx';
 import Link from 'next/link';
@@ -21,7 +22,7 @@ export const SearchSection: FC<Props> = ({ className }) => {
           <span className="ml-2 text-2xl font-bold">Avito</span>
         </Link>
 
-        <div className="flex flex-1 items-center">
+        <div className="flex flex-1 items-center gap-1">
           <Button
             variant="outlined"
             className="rounded-l-md rounded-r-none border-r-0 bg-cyan-500 text-white hover:bg-cyan-600 hover:text-white">
@@ -33,9 +34,7 @@ export const SearchSection: FC<Props> = ({ className }) => {
             placeholder="Поиск по объявлениям"
             className="rounded-none border-x-0 focus-visible:ring-0 focus-visible:ring-offset-0"
           />
-          <Button className="rounded-l-none rounded-r-md bg-cyan-500 hover:bg-cyan-600">
-            Найти
-          </Button>
+          <Button>Найти</Button>
           <div className="ml-4 flex items-center text-sm">Во всех регионах</div>
         </div>
       </div>

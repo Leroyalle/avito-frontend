@@ -1,0 +1,9 @@
+query findAllListings {
+  findAllListings {
+    id
+    name
+    price
+    images
+    createdAt
+  }
+}
