@@ -1,5 +1,5 @@
-query findAllListings {
-  findAllListings {
+query findAllListings($pagePagination: PagePagination!) {
+  findAllListings(pagePagination: $pagePagination) {
     id
     name
     price
