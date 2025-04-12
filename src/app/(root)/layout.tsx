@@ -6,10 +6,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <AppStoreNoticeBanner />
       <Header />
-      <main className="min-h-screen bg-gray-50">
+      <main>
         {children}
         <ServicesBanner />
       </main>

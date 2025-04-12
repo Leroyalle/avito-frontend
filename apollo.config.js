@@ -3,7 +3,7 @@ import 'dotenv/config';
 const apolloConfig = {
   client: {
     service: {
-      name: 'my-backend',
+      name: 'avito-api',
       url: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/graphql',
     },
     includes: ['src/**/*.{ts,tsx,graphql}'],
