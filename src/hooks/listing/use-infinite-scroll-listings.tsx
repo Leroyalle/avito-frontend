@@ -3,14 +3,17 @@ import { useFindAllListingsQuery } from '@/graphql/__generated__/output';
 import { NetworkStatus } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+
 export const useInfiniteScrollListings = () => {
-  const { ref, inView } = useInView();
-  const [page, setPage] = useState(1);
+  const { ref, inView } = useInView({ threshold: 0.1 });
+  const [hasMore, setHasMore] = useState(true);
+  const perPage = 20;
+
   const { data, fetchMore, loading, networkStatus } = useFindAllListingsQuery({
     variables: {
       pagePagination: {
         page: 1,
-        perPage: 20,
+        perPage,
       },
     },
     notifyOnNetworkStatusChange: true,
@@ -18,34 +21,34 @@ export const useInfiniteScrollListings = () => {
 
   const isLoading = loading && networkStatus !== NetworkStatus.fetchMore;
   const isFetchingNextPage = loading && networkStatus === NetworkStatus.fetchMore;
+  const page = data?.findAllListings ? Math.ceil(data.findAllListings.length / perPage) : 1;
 
   useEffect(() => {
-    if (!data) return;
-    if (inView && !loading && data.findAllListings.length > 0) {
-      const hasMore = data.findAllListings.length === page * 20;
+    if (!data || !hasMore || isLoading || isFetchingNextPage) return;
 
-      if (!hasMore) return;
-
+    if (inView && data.findAllListings.length > 0) {
       fetchMore({
         variables: {
           pagePagination: {
             page: page + 1,
-            perPage: 20,
+            perPage,
           },
         },
         updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult?.findAllListings?.length) return prev;
-
+          if (!fetchMoreResult?.findAllListings?.length) {
+            setHasMore(false);
+            return prev;
+          }
           return {
             ...prev,
             findAllListings: [...prev.findAllListings, ...fetchMoreResult.findAllListings],
           };
         },
-      }).then(() => {
-        setPage((prevPage) => prevPage + 1);
+      }).catch(() => {
+        setHasMore(false);
       });
     }
-  }, [inView, loading, fetchMore, page, data]);
+  }, [inView, data, hasMore, isLoading, isFetchingNextPage, fetchMore, page, perPage]);
 
   const cursor = (
     <Cursor
@@ -57,7 +60,6 @@ export const useInfiniteScrollListings = () => {
 
   return {
     data,
-    ref,
     isLoading,
     isFetchingNextPage,
     cursor,
