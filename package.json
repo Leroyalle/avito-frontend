@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.config.ts"
+    "codegen": "graphql-codegen --config codegen.config.ts",
+    "codegen:watch": "graphql-codegen --config codegen.config.ts --watch"
   },
   "dependencies": {
     "@ant-design/icons": "^5.6.1",

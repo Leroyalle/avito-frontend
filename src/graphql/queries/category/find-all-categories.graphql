@@ -1,0 +1,8 @@
+query findAllCategories {
+  findAllCategories {
+    id
+    name
+    slug
+    image
+  }
+}
