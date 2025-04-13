@@ -1,0 +1,9 @@
+query findAllListingsBySlugCategory($pagePagination: PagePagination!, $slug: String!) {
+  findAllBySlugCategory(pagePagination: $pagePagination, slug: $slug) {
+    id
+    name
+    price
+    images
+    createdAt
+  }
+}

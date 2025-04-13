@@ -7,6 +7,7 @@ import { FindAllListingsQuery } from '@/graphql/__generated__/output';
 
 interface Props {
   item: FindAllListingsQuery['findAllListings'][0];
+
   className?: string;
 }
 

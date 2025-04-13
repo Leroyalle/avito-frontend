@@ -5,6 +5,7 @@ import { ListingCard } from './components';
 
 interface Props {
   items: FindAllListingsQuery['findAllListings'];
+
   className?: string;
 }
 
