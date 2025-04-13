@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { clsx } from 'clsx';
-import { Breadcrumb } from 'antd';
-import { Subcategories } from './components';
+import { Breadcrumb, Pagination } from 'antd';
+import { Filters, Subcategories } from './components';
 
 interface Props {
   className?: string;
@@ -12,6 +12,8 @@ export const CategoryWrapper: FC<Props> = ({ className }) => {
     <div className={clsx('', className)}>
       <Breadcrumb items={[{ title: 'Авто' }]} />
       <Subcategories />
+      <Filters />
+      <Pagination defaultCurrent={1} total={50} />
     </div>
   );
 };
