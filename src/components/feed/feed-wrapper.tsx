@@ -23,11 +23,11 @@ export const FeedWrapper: FC<Props> = ({ className }) => {
   return (
     <div className={clsx('', className)}>
       <SearchSection />
-      <QuickLinks />
+      <QuickLinks items={categories?.findAllCategories.slice(0, 6) ?? []} />
       {isLoadingCategories ? (
         <CategoriesSkeleton />
       ) : (
-        <Categories items={categories?.findAllCategories ?? []} />
+        <Categories items={categories?.findAllCategories.slice(6) ?? []} />
       )}
       {isLoadingListings ? (
         <RecommendationsSkeleton />
