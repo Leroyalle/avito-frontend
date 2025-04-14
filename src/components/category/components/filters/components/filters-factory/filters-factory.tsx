@@ -1,4 +1,5 @@
-import type { FC } from 'react';
+'use client';
+import { useState, type FC } from 'react';
 import { clsx } from 'clsx';
 import { Button } from 'antd';
 import {
@@ -7,15 +8,21 @@ import {
   TableOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
+import { FiltersModal } from './components';
 
 interface Props {
   className?: string;
 }
 
 export const FiltersFactory: FC<Props> = ({ className }) => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   return (
     <div className={clsx('mb-4 flex flex-wrap items-center gap-2', className)}>
-      <Button variant="outlined" className="flex items-center gap-2">
+      <Button
+        variant="outlined"
+        className="flex items-center gap-2"
+        onClick={() => setIsOpenModal(true)}>
         <FilterOutlined size={20} />
         Фильтры
       </Button>
@@ -31,6 +38,7 @@ export const FiltersFactory: FC<Props> = ({ className }) => {
           <UnorderedListOutlined size={20} />
         </Button>
       </div>
+      <FiltersModal isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
     </div>
   );
 };

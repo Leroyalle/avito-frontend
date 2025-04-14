@@ -4,23 +4,25 @@ import { clsx } from 'clsx';
 import { Breadcrumb, Pagination } from 'antd';
 import { Filters, Subcategories } from './components';
 import { Container, ListingList } from '../shared';
-import { usePaginationListings } from '@/hooks';
-import { filtersAtom, initialFilters } from '@/store/filters-atom';
+import { useSyncFiltersWithUrl, usePaginationListings } from '@/hooks';
+import { filtersAtom } from '@/store/filters-atom';
 import { useHydrateAtoms } from 'jotai/utils';
+import { FiltersState } from '@/types';
 
 interface Props {
   slug: string;
-  page: number;
+  queryFilters: FiltersState;
   className?: string;
 }
 
-export const CategoryWrapper: FC<Props> = ({ slug, page, className }) => {
-  useHydrateAtoms([[filtersAtom, { ...initialFilters, page }]]);
-  const { data: listings, setPage } = usePaginationListings(slug);
+export const CategoryWrapper: FC<Props> = ({ slug, queryFilters, className }) => {
+  useHydrateAtoms([[filtersAtom, queryFilters]]);
+  useSyncFiltersWithUrl();
+  const { data: listings, setPage, page } = usePaginationListings(slug);
 
   return (
     <Container className={clsx('', className)}>
-      <Breadcrumb items={[{ title: slug }]} />
+      <Breadcrumb items={[{ title: 'Главная', href: '/' }, { title: slug }]} />
       <Subcategories />
       <Filters />
       <ListingList items={listings?.findAllBySlugCategory ?? []} />

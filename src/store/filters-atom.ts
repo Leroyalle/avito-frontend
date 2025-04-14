@@ -1,13 +1,5 @@
+import { FiltersState } from '@/types';
 import { atom } from 'jotai';
-
-interface FiltersState {
-  isNew: boolean;
-  minPrice: number;
-  maxPrice: number;
-  page: number;
-  perPage: number;
-  viewMode: 'list' | 'grid';
-}
 
 export const initialFilters: FiltersState = {
   isNew: false,
