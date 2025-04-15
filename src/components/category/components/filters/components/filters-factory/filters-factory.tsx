@@ -10,8 +10,9 @@ import {
 } from '@ant-design/icons';
 import { FiltersModal } from './components';
 import { FindAllFiltersQuery } from '@/graphql/__generated__/output';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { filtersAtom, initialFilters } from '@/store/filters-atom';
+import { viewModeAtom } from '@/store/view-mode-atom';
 
 interface Props {
   items: FindAllFiltersQuery['findAllFilters'];
@@ -21,6 +22,7 @@ interface Props {
 export const FiltersFactory: FC<Props> = ({ items, className }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const setFilters = useSetAtom(filtersAtom);
+  const [viewMode, setViewMode] = useAtom(viewModeAtom);
 
   return (
     <div className={clsx('mb-4 flex flex-wrap items-center gap-2', className)}>
@@ -39,10 +41,18 @@ export const FiltersFactory: FC<Props> = ({ items, className }) => {
         По умолчанию
       </Button>
       <div className="ml-auto flex items-center gap-2">
-        <Button variant="outlined" className="h-9 w-9">
+        <Button
+          variant="outlined"
+          color={viewMode === 'grid' ? 'primary' : 'default'}
+          className="h-9 w-9"
+          onClick={() => setViewMode('grid')}>
           <TableOutlined size={20} />
         </Button>
-        <Button variant="outlined" className="h-9 w-9 bg-gray-100">
+        <Button
+          variant="outlined"
+          color={viewMode === 'list' ? 'primary' : 'default'}
+          className="h-9 w-9 bg-gray-100"
+          onClick={() => setViewMode('list')}>
           <UnorderedListOutlined size={20} />
         </Button>
       </div>

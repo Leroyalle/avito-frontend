@@ -7,7 +7,6 @@ export const initialFilters: FiltersState = {
   maxPrice: 100000,
   page: 1,
   perPage: 20,
-  viewMode: 'list',
   filters: [],
 };
 

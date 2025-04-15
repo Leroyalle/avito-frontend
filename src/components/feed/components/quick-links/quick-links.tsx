@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { clsx } from 'clsx';
 import Link from 'next/link';
 import { FindAllCategoriesQuery } from '@/graphql/__generated__/output';
+import Image from 'next/image';
 
 interface Props {
   items: FindAllCategoriesQuery['findAllCategories'];
@@ -17,9 +18,11 @@ export const QuickLinks: FC<Props> = ({ items, className }) => {
             key={item.id}
             href={`/category/${item.slug}`}
             className="flex items-center rounded-full bg-gray-200 px-3 py-1">
-            <img
+            <Image
               src={item.image}
               alt={item.name}
+              width={20}
+              height={20}
               className="mr-2 h-5 w-5 object-cover rounded-full"
             />
             {item.name}
