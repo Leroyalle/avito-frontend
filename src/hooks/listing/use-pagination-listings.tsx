@@ -4,11 +4,14 @@ import { useAtom } from 'jotai';
 
 export const usePaginationListings = (slug: string) => {
   const [filters, setFilters] = useAtom(filtersAtom);
-  const { data } = useFindAllListingsBySlugCategoryQuery({
+  const { data, loading } = useFindAllListingsBySlugCategoryQuery({
     variables: {
-      pagePagination: {
+      findListingsInput: {
         page: filters.page,
         perPage: filters.perPage,
+        filters: filters.filters,
+        maxPrice: filters.maxPrice,
+        minPrice: filters.minPrice,
       },
       slug,
     },
@@ -23,5 +26,6 @@ export const usePaginationListings = (slug: string) => {
     hasMore,
     page: filters.page,
     setPage: (page: number) => setFilters({ ...filters, page: page }),
+    loading,
   };
 };

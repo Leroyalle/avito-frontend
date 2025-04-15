@@ -1,15 +1,23 @@
 import type { FC } from 'react';
 import { clsx } from 'clsx';
 import { FindAllListingsQuery } from '@/graphql/__generated__/output';
-import { ListingCard } from './components';
+import { EmptyState, ListingCard, Skeleton } from './components';
 
 interface Props {
   items: FindAllListingsQuery['findAllListings'];
-
+  isLoading?: boolean;
   className?: string;
 }
 
-export const ListingList: FC<Props> = ({ items, className }) => {
+export const ListingList: FC<Props> = ({ items, isLoading, className }) => {
+  if (isLoading) {
+    return <Skeleton />;
+  }
+
+  if (!items.length) {
+    return <EmptyState />;
+  }
+
   return (
     <div
       className={clsx(

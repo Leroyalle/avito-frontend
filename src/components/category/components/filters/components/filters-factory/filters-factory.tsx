@@ -9,12 +9,14 @@ import {
   UnorderedListOutlined,
 } from '@ant-design/icons';
 import { FiltersModal } from './components';
+import { FindAllFiltersQuery } from '@/graphql/__generated__/output';
 
 interface Props {
+  items: FindAllFiltersQuery['findAllFilters'];
   className?: string;
 }
 
-export const FiltersFactory: FC<Props> = ({ className }) => {
+export const FiltersFactory: FC<Props> = ({ items, className }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
@@ -38,7 +40,7 @@ export const FiltersFactory: FC<Props> = ({ className }) => {
           <UnorderedListOutlined size={20} />
         </Button>
       </div>
-      <FiltersModal isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
+      <FiltersModal items={items} isOpen={isOpenModal} onClose={() => setIsOpenModal(false)} />
     </div>
   );
 };

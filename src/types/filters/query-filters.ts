@@ -5,4 +5,5 @@ export interface QueryFilters {
   page: string;
   perPage: string;
   viewMode: 'list' | 'grid';
+  filters: string | string[];
 }

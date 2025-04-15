@@ -1,5 +1,5 @@
-query findAllListingsBySlugCategory($pagePagination: PagePagination!, $slug: String!) {
-  findAllBySlugCategory(pagePagination: $pagePagination, slug: $slug) {
+query findAllListingsBySlugCategory($findListingsInput: FindListingsInput!, $slug: String!) {
+  findAllBySlugCategory(findListingsInput: $findListingsInput, slug: $slug) {
     id
     name
     price

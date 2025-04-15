@@ -5,4 +5,5 @@ export interface FiltersState {
   page: number;
   perPage: number;
   viewMode: 'list' | 'grid';
+  filters: string[];
 }

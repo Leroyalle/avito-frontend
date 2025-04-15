@@ -11,13 +11,21 @@ export const useSyncFiltersWithUrl = () => {
 
   useEffect(() => {
     const currentParams = new URLSearchParams(searchParams.toString());
+
     Object.entries(filters).forEach(([key, value]) => {
-      if (value) {
+      if (Array.isArray(value)) {
+        if (value.length > 0) {
+          currentParams.set(key, value.join(','));
+        } else {
+          currentParams.delete(key);
+        }
+      } else if (value) {
         currentParams.set(key, value);
       } else {
         currentParams.delete(key);
       }
     });
+
     router.replace(`${pathname}?${currentParams.toString()}`, { scroll: false });
   }, [filters, pathname, searchParams, router]);
 };
