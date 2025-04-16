@@ -1,0 +1,12 @@
+query searchListings($searchListingsInput: SearchListingsInput!) {
+  searchListings(searchListingsInput: $searchListingsInput) {
+    id
+    name
+    price
+    images
+    categories {
+      id
+      name
+    }
+  }
+}

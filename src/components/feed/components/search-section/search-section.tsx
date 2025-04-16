@@ -1,17 +1,36 @@
 import '@ant-design/v5-patch-for-react-19';
-import type { FC } from 'react';
+import { useState, type FC } from 'react';
 import { clsx } from 'clsx';
 import Link from 'next/link';
 import { Button, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import { useSearchListingsQuery } from '@/graphql/__generated__/output';
+import { SearchResults } from './components';
+import { Container } from '@/components/shared';
+import { useClickOutside, useDebounceValue } from '@/hooks';
 
 interface Props {
   className?: string;
 }
 
 export const SearchSection: FC<Props> = ({ className }) => {
+  const [searchInput, setSearchInput] = useState('');
+  const [isShowResults, setIsShowResults] = useState(false);
+  const debouncedSearchValue = useDebounceValue(searchInput, [searchInput]);
+  const ref = useClickOutside(() => setIsShowResults(false));
+  const { data: searchResults, loading } = useSearchListingsQuery({
+    variables: {
+      searchListingsInput: {
+        name: debouncedSearchValue,
+      },
+    },
+    skip: !debouncedSearchValue,
+  });
+
+  console.log(loading);
+
   return (
-    <div className={clsx('container mx-auto px-4 py-4', className)}>
+    <Container className={clsx('relative px-4 py-4', className)} ref={ref}>
       <div className="flex items-center">
         <Link href="/" className="mr-4 flex items-center">
           <div className="flex">
@@ -31,13 +50,19 @@ export const SearchSection: FC<Props> = ({ className }) => {
           </Button>
           <Input
             type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onFocus={() => setIsShowResults(true)}
             placeholder="Поиск по объявлениям"
             className="rounded-none border-x-0 focus-visible:ring-0 focus-visible:ring-offset-0"
           />
-          <Button>Найти</Button>
+          <Button disabled={loading}>Найти</Button>
           <div className="ml-4 flex items-center text-sm">Во всех регионах</div>
         </div>
       </div>
-    </div>
+      {isShowResults && searchInput && (
+        <SearchResults items={searchResults?.searchListings ?? []} />
+      )}
+    </Container>
   );
 };
