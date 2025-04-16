@@ -1,13 +1,7 @@
 import type { FC } from 'react';
-import Link from 'next/link';
-import { Badge, Button } from 'antd';
-import {
-  MessageOutlined,
-  PhoneOutlined,
-  RightOutlined,
-  SnippetsOutlined,
-  StarOutlined,
-} from '@ant-design/icons';
+import { Button } from 'antd';
+import { RightOutlined, SnippetsOutlined } from '@ant-design/icons';
+import { PriceAndLogo, UserActions, UserBadges, UserInfo } from './components';
 
 interface Props {
   className?: string;
@@ -17,60 +11,10 @@ export const RightContent: FC<Props> = ({ className }) => {
   return (
     <div className={className}>
       <div className="sticky top-4 rounded-lg bg-white p-4 shadow-md">
-        <div className="mb-4">
-          <h2 className="text-3xl font-bold">750 000 ₽</h2>
-          <div className="mt-1 text-sm">
-            <span className="text-gray-600">В кредит от 18 080 ₽/мес.</span>
-            <Link href="#" className="ml-1 text-[var(--avito-primary)] hover:underline">
-              Посмотреть предложения
-            </Link>
-          </div>
-          <div className="mt-2 flex items-center space-x-2">
-            <div className="h-6 w-6 rounded-full bg-green-500"></div>
-            <div className="h-6 w-6 rounded-full bg-blue-500"></div>
-            <div className="h-6 w-6 rounded-full bg-yellow-500"></div>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <Button className="w-full bg-green-500 hover:bg-green-600">
-            <PhoneOutlined className="mr-2" size={16} />
-            Показать телефон
-            <span className="ml-2 text-xs text-green-200">8 966 XXX-XX-XX</span>
-          </Button>
-          <Button variant="outlined" className="w-full">
-            <MessageOutlined className="mr-2" size={16} />
-            Написать сообщение
-            <span className="ml-2 text-xs text-gray-500">Отвечает около 30 минут</span>
-          </Button>
-        </div>
-
-        <div className="mt-4 flex items-center">
-          <div className="mr-3 h-12 w-12 overflow-hidden rounded-full bg-yellow-100">
-            <div className="flex h-full w-full items-center justify-center text-xl font-bold text-yellow-500">
-              Р
-            </div>
-          </div>
-          <div>
-            <h3 className="font-medium">Роман</h3>
-            <div className="flex items-center">
-              <span className="mr-1">5.0</span>
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <StarOutlined key={star} className="h-3 w-3 fill-yellow-400" />
-                ))}
-              </div>
-              <span className="ml-1 text-sm text-gray-500">12 отзывов</span>
-            </div>
-            <p className="text-sm text-gray-600">Частное лицо</p>
-            <p className="text-sm text-gray-600">На Авито с января 2011</p>
-          </div>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Badge className="rounded-md bg-gray-100">Надёжный партнёр</Badge>
-          <Badge className="rounded-md bg-gray-100">Экокласс: ~162 тонн CO₂</Badge>
-        </div>
+        <PriceAndLogo />
+        <UserActions />
+        <UserInfo />
+        <UserBadges />
 
         <div className="mt-4 space-y-2">
           <Button variant="outlined" className="w-full justify-between">
