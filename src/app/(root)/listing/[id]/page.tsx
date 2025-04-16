@@ -1,3 +1,5 @@
+import { ListingWrapper } from '@/components';
+
 export default function Listing() {
-  return <div>Страница объявления</div>;
+  return <ListingWrapper />;
 }

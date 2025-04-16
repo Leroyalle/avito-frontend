@@ -11,10 +11,16 @@ interface Props {
 
 export const SearchResults: FC<Props> = ({ items, className }) => {
   if (items.length === 0) {
-    return null;
+    return (
+      <div
+        className={clsx(
+          'absolute left-0 right-0 top-full z-50 rounded-md border border-gray-200 bg-white shadow-lg',
+          className,
+        )}>
+        <div className="p-2 text-sm text-gray-500 text-center">Ничего не найдено</div>
+      </div>
+    );
   }
-
-  console.log(items);
 
   return (
     <div

@@ -27,8 +27,6 @@ export const SearchSection: FC<Props> = ({ className }) => {
     skip: !debouncedSearchValue,
   });
 
-  console.log(loading);
-
   return (
     <Container className={clsx('relative px-4 py-4', className)} ref={ref}>
       <div className="flex items-center">
