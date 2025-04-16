@@ -1,2 +1,2 @@
-export { LeftContent } from './left-content';
-export { RightContent } from './right-content';
+export * from './left-content';
+export * from './right-content';
