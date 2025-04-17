@@ -2,17 +2,19 @@ import type { FC } from 'react';
 import { Image } from 'antd';
 
 interface Props {
+  items: string[];
+  name: string;
   className?: string;
 }
 
-export const ImageGallery: FC<Props> = ({ className }) => {
+export const ImageGallery: FC<Props> = ({ items, name, className }) => {
   return (
     <div className={className}>
       <div className="mb-4">
         <div className="relative h-[400px] w-full overflow-hidden rounded-lg">
           <Image
-            src="/placeholder.svg?height=400&width=600"
-            alt="Chevrolet Aveo"
+            src={items[0]}
+            alt={name}
             width={600}
             height={400}
             className="h-full w-full object-cover"
@@ -22,11 +24,11 @@ export const ImageGallery: FC<Props> = ({ className }) => {
       </div>
 
       <div className="grid grid-cols-6 gap-2">
-        {[...Array(12)].map((_, i) => (
+        {items.splice(1).map((item, i) => (
           <div key={i} className="aspect-square overflow-hidden rounded-md border border-gray-200">
             <Image
-              src="/placeholder.svg?height=80&width=80"
-              alt={`Thumbnail ${i + 1}`}
+              src={item}
+              alt={`${name} ${i + 1}`}
               width={80}
               height={80}
               className="h-full w-full object-cover"

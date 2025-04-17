@@ -4,14 +4,15 @@ import { Button } from 'antd';
 import { SnippetsOutlined } from '@ant-design/icons';
 
 interface Props {
+  totalListings: number;
   className?: string;
 }
 
-export const UserProfileActions: FC<Props> = ({ className }) => {
+export const UserProfileActions: FC<Props> = ({ totalListings, className }) => {
   return (
     <div className={clsx('mt-4 space-y-2', className)}>
       <Button variant="outlined" className="w-full justify-between">
-        2 объявления пользователя
+        {totalListings} объявления пользователя
         <SnippetsOutlined size={16} />
       </Button>
       <Button variant="outlined" className="w-full">

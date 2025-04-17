@@ -1,0 +1,15 @@
+query findListingById($id: ID!) {
+  findOneListing(id: $id) {
+    id
+    name
+    price
+    images
+    description
+    createdAt
+    user {
+      id
+      name
+      createdAt
+    }
+  }
+}
